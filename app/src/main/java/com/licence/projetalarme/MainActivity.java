@@ -1,7 +1,9 @@
 package com.licence.projetalarme;
 
 import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TimePicker alarm_timepicker;
     TextView update_text;
     Context context;
+    PendingIntent pending_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +51,70 @@ public class MainActivity extends AppCompatActivity {
         // Création d'une instance d'un calendrier
         Calendar calendar = Calendar.getInstance();
 
-        //Initialisation du bouton start
-        Button start_alarm = (Button) findViewById(R.id.alarm_on);
-        //Création d'un onClick listener pour lancer l'alarme
 
+
+        //Initialisation du bouton start
+        Button alarm_on = (Button) findViewById(R.id.alarm_on);
+
+        //Création d'un intent pour la classe Alarme receiver
+        Intent my_intent = new Intent(this.context, Alarm_Receiver.class);
+
+        //Création d'un onClick listener pour lancer l'alarme
+        alarm_on.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Paramètrages de l'instance calendrier avec heure et minute sélectionnée
+                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getHour());
+                calendar.set(Calendar.MINUTE, alarm_timepicker.getMinute());
+
+                //Recupère la valeur en chaîne de caractère de l'heure et des minutes
+                int hour = alarm_timepicker.getHour();
+                int minute = alarm_timepicker.getMinute();
+
+                //Conversion des variables int en string
+                String hour_string = String.valueOf(hour);
+                String minute_string = String.valueOf(minute);
+
+                /*if (hour > 12){
+                    hour_string = String.valueOf(hour - 12);
+                }*/
+
+                if (minute <10){
+                    //10:7 --> 10:07
+                    minute_string = "0" + String.valueOf(minute);
+                }
+                // Méthode pour changer le texte
+                set_alarm_text("Alarme réglé pour : " + hour_string + ":" + minute_string);
+
+                //Créer une requête de intent qui retarde le intent
+                //Jusqu'au temps choisis sur le calendrier
+                pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
+
+                //Règlage de l'alarme manager
+                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                        pending_intent);
+            }
+        });
 
         //Initialisation du bouton stop
         Button alarm_off = (Button) findViewById(R.id.alarm_off);
         //Création d'un onClick listener pour stopper l'alarme
+        alarm_off.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Méthode pour changer le texte
+                set_alarm_text("Alarme désactivée !");
+
+                //Annule l'alarme
+                alarm_manager.cancel(pending_intent);
+            }
+        });
+    }
+
+    private void set_alarm_text(String output) {
+        update_text.setText(output);
     }
 
     @Override
