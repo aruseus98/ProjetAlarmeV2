@@ -21,7 +21,7 @@ public class RingtonePlayingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
-        Log.i("LocalService", "Received start id " + startdId + ": " + intent);
+        Log.i("LocalService", "Received start id " + startId + ": " + intent);
         return START_NOT_STICKY;
     }
 
