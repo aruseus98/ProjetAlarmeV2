@@ -87,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
                 // Méthode pour changer le texte
                 set_alarm_text("Alarme réglé pour : " + hour_string + ":" + minute_string);
 
+                // Put in extra sting into my_intent
+                //Dit à l'alrme que nous avons appuyé sur On
+                my_intent.putExtra("extra", "alarm on");
+
                 //Créer une requête de intent qui retarde le intent
                 //Jusqu'au temps choisis sur le calendrier
                 pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent,
@@ -109,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
 
                 //Annule l'alarme
                 alarm_manager.cancel(pending_intent);
+
+                // put extra string into my_intent
+                //Dit à l'alarme que nous avons appuyé sur OFF
+                my_intent.putExtra("extra", " alarm off");
+
+                //Stop la sonnerie
+                sendBroadcast(my_intent);
             }
         });
     }
