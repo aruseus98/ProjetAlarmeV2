@@ -1,9 +1,14 @@
 package com.licence.projetalarme;
 
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,6 +27,7 @@ public class RingtonePlayingService extends Service {
         return null;
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
@@ -58,6 +64,28 @@ public class RingtonePlayingService extends Service {
 
             this.isRunning = true;
             this.startId = 0;
+
+            //Mise en place du service de notification
+            NotificationManager notify_manager = (NotificationManager)
+                    getSystemService(NOTIFICATION_SERVICE);
+
+            //Mise en place d'un intent qui ira dans Main activity
+            Intent intent_main_activity = new Intent(this.getApplicationContext(), MainActivity.class);
+
+            //Mise en place d'une requête
+            PendingIntent pending_intent_main_activity = PendingIntent.getActivity(this, 0,
+                    intent_main_activity, 0);
+
+            //Paramètrage des notifications
+            Notification notification_popup = new Notification.Builder(this)
+                    .setContentTitle("An alarm is going off !")
+                    .setContentText("Click me !")
+                    .setContentIntent(pending_intent_main_activity)
+                    .setAutoCancel(true)
+                    .build();
+
+            notify_manager.notify(0, notification_popup);
+
         }
 
         //S'il y a une sonnerie en cours et que l'utilisateur appuie sur OFF
