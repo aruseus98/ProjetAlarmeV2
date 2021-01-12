@@ -78,6 +78,7 @@ public class RingtonePlayingService extends Service {
 
             //Paramètrage des notifications
             Notification notification_popup = new Notification.Builder(this)
+                    .setSmallIcon(R.drawable.logo)
                     .setContentTitle("An alarm is going off !")
                     .setContentText("Click me !")
                     .setContentIntent(pending_intent_main_activity)
