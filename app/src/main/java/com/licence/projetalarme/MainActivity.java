@@ -16,13 +16,16 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     //Pour faire notre alarme manager
     AlarmManager alarm_manager;
@@ -102,6 +105,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //creation du spinner dans le main
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_citation);
+        //creer une liste pour le spinner dans string.xml dans le dosssier layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.citation_array, android.R.layout.simple_spinner_item);
+        //spicifie élément du layout a utiliser
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //applique au spinner
+        spinner.setAdapter(adapter);
+
+
+
+
         //Initialisation du bouton stop
         Button alarm_off = (Button) findViewById(R.id.alarm_off);
         //Création d'un onClick listener pour stopper l'alarme
@@ -149,5 +164,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

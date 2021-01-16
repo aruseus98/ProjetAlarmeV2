@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,7 +23,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:clickable="true"
-        android:text="Turn on Alarm"
+        android:focusable="true"
+        android:text="@string/turn_on_alarm"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -39,7 +39,8 @@
         android:layout_height="42dp"
         android:layout_marginTop="20dp"
         android:clickable="true"
-        android:text="Turn off Alarm"
+        android:focusable="true"
+        android:text="@string/turn_off_alarm"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -50,11 +51,11 @@
 
     <TextView
         android:id="@+id/update_text"
-        android:layout_width="238dp"
-        android:layout_height="153dp"
+        android:layout_width="234dp"
+        android:layout_height="77dp"
         android:layout_below="@+id/alarm_on"
         android:layout_marginTop="16dp"
-        android:text="Alarme réglé ?"
+        android:text="@string/alarme_r_gl"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -62,6 +63,29 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alarm_on" />
+
+    <Spinner
+        android:id="@+id/spinner_citation"
+        android:layout_width="354dp"
+        android:layout_height="27dp"
+        android:layout_below="@+id/alarm_on"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="624dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_citation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="592dp"
+        android:text="@string/choisit_ta_citation"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

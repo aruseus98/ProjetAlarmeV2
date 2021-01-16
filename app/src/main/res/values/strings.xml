@@ -10,4 +10,16 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="default_notification_channel_id" />
+    <string name="turn_on_alarm">Turn on Alarm</string>
+    <string name="turn_off_alarm">Turn off Alarm</string>
+    <string name="alarme_r_gl">Alarme réglé ?</string>
+    <string name="choisit_ta_citation">choisit ta citation</string>
+
+    <!-- les citation qu'on choisit -->
+    <string-array name="citation_array">
+        <item>citation 1</item>
+        <item>citation 2</item>
+        <item>citation 3</item>
+    </string-array>
+
 </resources>

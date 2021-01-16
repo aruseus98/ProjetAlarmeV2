@@ -3,13 +3,10 @@ package com.licence.projetalarme;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.IBinder;
@@ -30,7 +27,7 @@ public class RingtonePlayingService extends Service {
         return null;
     }
 
-    @androidx.annotation.RequiresApi(api = Build.VERSION_CODES.O)
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         Log.i("LocalService", "Received start id " + startId + ": " + intent);
@@ -68,45 +65,28 @@ public class RingtonePlayingService extends Service {
             this.isRunning = true;
             this.startId = 0;
 
-            int NOTIFICATION_ID = 234;
-
             //Mise en place du service de notification
             NotificationManager notify_manager = (NotificationManager)
                     getSystemService(NOTIFICATION_SERVICE);
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                String CHANNEL_ID = "my_channel_01";
-                CharSequence name = "my_channel";
-                String Description = "This is my channel";
-                int importance = NotificationManager.IMPORTANCE_HIGH;
-                NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                mChannel.setDescription(Description);
-                mChannel.enableLights(true);
-                mChannel.setLightColor(Color.RED);
-                mChannel.enableVibration(true);
-                mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-                mChannel.setShowBadge(false);
-                notify_manager.createNotificationChannel(mChannel);
+            //Mise en place d'un intent qui ira dans Main activity
+            Intent intent_main_activity = new Intent(this.getApplicationContext(), MainActivity.class);
 
-                //Mise en place d'un intent qui ira dans Main activity
-                Intent intent_main_activity = new Intent(this.getApplicationContext(), MainActivity.class);
+            //Mise en place d'une requête
+            PendingIntent pending_intent_main_activity = PendingIntent.getActivity(this, 0,
+                    intent_main_activity, 0);
 
-                //Mise en place d'une requête
-                PendingIntent pending_intent_main_activity = PendingIntent.getActivity(this, 0,
-                        intent_main_activity, 0);
+            //Paramètrage des notifications
+            Notification notification_popup = new Notification.Builder(this)
+                    .setSmallIcon(R.drawable.logo)
+                    .setContentTitle("An alarm is going off !")
+                    .setContentText("Click me !")
+                    .setContentIntent(pending_intent_main_activity)
+                    .setAutoCancel(true)
+                    .build();
 
+            notify_manager.notify(0, notification_popup);
 
-                //Paramètrage des notifications
-                Notification notification_popup = new Notification.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("An alarm is going off !")
-                        .setContentText("Click me !")
-                        .setContentIntent(pending_intent_main_activity)
-                        .setAutoCancel(true)
-                        .build();
-
-                notify_manager.notify(0, notification_popup);
-            }
         }
 
         //S'il y a une sonnerie en cours et que l'utilisateur appuie sur OFF
