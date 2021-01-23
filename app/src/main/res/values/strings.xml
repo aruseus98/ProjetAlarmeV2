@@ -14,12 +14,22 @@
     <string name="turn_off_alarm">Turn off Alarm</string>
     <string name="alarme_r_gl">Alarme réglé ?</string>
     <string name="choisit_ta_citation">choisit ta citation</string>
+    <string name="todo">TODO</string>
+    <string name="textview">TextView</string>
 
     <!-- les citation qu'on choisit -->
     <string-array name="citation_array">
         <item>citation 1</item>
         <item>citation 2</item>
         <item>citation 3</item>
+    </string-array>
+
+    <!-- les musique qu'on choisit -->
+    <string-array name="musique_array">
+        <item>choisit une musique</item>
+        <item>sonnerie1</item>
+        <item>sonnerie2</item>
+        <item>sonnerie3</item>
     </string-array>
 
 </resources>

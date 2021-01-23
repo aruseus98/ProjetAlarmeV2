@@ -15,11 +15,20 @@ public class Alarm_Receiver extends BroadcastReceiver {
 
         Log.e("Quel est la clé ?", get_your_string);
 
+        //fetch extra long dans intent
+        Integer get_choix_musique = intent.getExtras().getInt("musique1");
+
+        Log.e("l id musique est", Integer.toString(get_choix_musique));
+
+
         //Création d'un intent pour faire le service de sonnerie
         Intent service_intent = new Intent(context, RingtonePlayingService.class);
 
         // passe l'extra string du main activity au Ringtone Playing service
         service_intent.putExtra("extra", get_your_string);
+        //choisit la musique par rapport au int du spinner
+        service_intent.putExtra("musique1", get_choix_musique);
+
 
         //Lancement du service de sonnerie
         context.startService(service_intent);

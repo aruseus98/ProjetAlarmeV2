@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     TextView update_text;
     Context context;
     PendingIntent pending_intent;
+    int choix_musique;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //Dit à l'alrme que nous avons appuyé sur On
                 my_intent.putExtra("extra", "alarm on");
 
+                //mettre le long dans intent pour que le spinner correspond
+                my_intent.putExtra("musique", choix_musique);
+
                 //Créer une requête de intent qui retarde le intent
                 //Jusqu'au temps choisis sur le calendrier
                 pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent,
@@ -105,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        //creation du spinner dans le main
+        //creation du spinner dans le main citation
         Spinner spinner = (Spinner) findViewById(R.id.spinner_citation);
         //creer une liste pour le spinner dans string.xml dans le dosssier layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.citation_array, android.R.layout.simple_spinner_item);
@@ -114,7 +119,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //applique au spinner
         spinner.setAdapter(adapter);
 
+        //creation du spinner musique dans le main
+        Spinner spinner2 = (Spinner) findViewById(R.id.spinner_musique);
+        //creer une liste pour le spinner dans string.xml dans le dosssier layout
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.musique_array, android.R.layout.simple_spinner_item);
+        //spicifie élément du layout a utiliser
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //applique au spinner
+        spinner2.setAdapter(adapter2);
 
+        // choisit la musique selection
+        spinner2.setOnItemSelectedListener(this);
 
 
         //Initialisation du bouton stop
@@ -132,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // put extra string into my_intent
                 //Dit à l'alarme que nous avons appuyé sur OFF
                 my_intent.putExtra("extra", " alarm off");
+
+                //mettre le long dans alarm aussi
+                my_intent.putExtra("musique1", choix_musique);
+                Log.e("la musique est", String.valueOf(choix_musique));
+
 
                 //Stop la sonnerie
                 sendBroadcast(my_intent);
@@ -168,7 +188,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+       //joue la musique qu'on a choisit dans le spinner
+        choix_musique = (int) id;
     }
 
     @Override

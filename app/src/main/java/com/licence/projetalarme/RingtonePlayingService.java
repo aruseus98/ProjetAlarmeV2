@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.Random;
+
 public class RingtonePlayingService extends Service {
 
     MediaPlayer media_song;
@@ -37,8 +39,12 @@ public class RingtonePlayingService extends Service {
 
         // fetch la valeur extra
         String state = intent.getExtras().getString("extra");
+        //fetch la musique
+        Integer musique_id = intent.getExtras().getInt("musique1");
+
 
         Log.e("Ringtone state:extra is", state);
+        Log.e("musique1 est ", musique_id.toString());
 
         // Converti la valeur extra de intent
         assert  state !=null;
@@ -60,15 +66,36 @@ public class RingtonePlayingService extends Service {
         if (!this.isRunning && startId == 1) {
             Log.e("Il n'y a pas de musique", "Commencé");
 
-            //Création d'une instance de media player
-            media_song = MediaPlayer.create(this, R.raw.sonnerie);
-            // Lance la sonnerie
-            media_song.start();
+
 
             this.isRunning = true;
             this.startId = 0;
 
             int NOTIFICATION_ID = 234;
+
+
+
+            // joue la musique choisit dans le spinner
+            if (musique_id == 0){
+                media_song = MediaPlayer.create(this, R.raw.sonnerie1);
+                media_song.start();
+
+
+            }
+            else if (musique_id == 1){
+                //Création d'une instance de media player
+                media_song = MediaPlayer.create(this, R.raw.sonnerie1);
+                // Lance la sonnerie
+                media_song.start();
+            }
+            else if (musique_id == 2){
+                media_song = MediaPlayer.create(this, R.raw.sonnerie2);
+                media_song.start();
+            }
+            else if (musique_id == 3){
+                media_song = MediaPlayer.create(this, R.raw.sonnerie3);
+                media_song.start();
+            }
 
             //Mise en place du service de notification
             NotificationManager notify_manager = (NotificationManager)
