@@ -16,6 +16,8 @@
     <string name="choisit_ta_citation">choisit ta citation</string>
     <string name="todo">TODO</string>
     <string name="textview">TextView</string>
+    <string name="choisissez_votre_citation">Choisissez votre citation</string>
+    <string name="musique">Musique</string>
 
     <!-- les citation qu'on choisit -->
     <string-array name="citation_array">
