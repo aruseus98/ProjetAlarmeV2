@@ -40,7 +40,7 @@
         android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="Désactive"
+        android:text="Désactiver"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
