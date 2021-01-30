@@ -24,7 +24,7 @@
         android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="Activer"
+        android:text="Active"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
