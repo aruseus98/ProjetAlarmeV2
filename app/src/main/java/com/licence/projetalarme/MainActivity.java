@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Spinner spinner = (Spinner) findViewById(R.id.spinner_citation);
         //creer une liste pour le spinner dans string.xml dans le dosssier layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.citation_array, android.R.layout.simple_spinner_item);
-        //spicifie élément du layout a utiliser
+        //spécifie élément du layout a utiliser
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //applique au spinner
         spinner.setAdapter(adapter);
