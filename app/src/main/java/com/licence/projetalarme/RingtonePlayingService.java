@@ -126,8 +126,8 @@ public class RingtonePlayingService extends Service {
                 //Paramètrage des notifications
                 Notification notification_popup = new Notification.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("An alarm is going off !")
-                        .setContentText("Click me !")
+                        .setContentTitle("Une alarme sonne")
+                        .setContentText("Cliquez dessus !")
                         .setContentIntent(pending_intent_main_activity)
                         .setAutoCancel(true)
                         .build();

@@ -10,7 +10,7 @@
         android:id="@+id/timePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="4dp"
         android:timePickerMode="clock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,15 +21,15 @@
         android:id="@+id/alarm_on"
         android:layout_width="134dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/turn_on_alarm"
+        android:text="Active"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timePicker" />
 
@@ -37,17 +37,19 @@
         android:id="@+id/alarm_off"
         android:layout_width="142dp"
         android:layout_height="42dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="@string/turn_off_alarm"
+        android:text="Désactiver"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/update_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/timePicker"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/update_text"
@@ -71,7 +73,7 @@
         android:layout_below="@+id/alarm_on"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="596dp"
+        android:layout_marginTop="560dp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,8 +83,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="576dp"
-        android:text="@string/choisissez_votre_citation"
+        android:layout_marginTop="536dp"
+        android:text="Choisissez votre citation"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -91,7 +93,7 @@
         android:id="@+id/spinner_musique"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="656dp"
+        android:layout_marginTop="620dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -100,8 +102,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="176dp"
-        android:layout_marginTop="637dp"
-        android:text="@string/musique"
+        android:layout_marginTop="592dp"
+        android:text="Musique"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
